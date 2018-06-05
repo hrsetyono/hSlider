@@ -1,6 +1,6 @@
 # basicSlider
 
-[![Dependencies](https://david-dm.org/electerious/basicslider.svg)](https://david-dm.org/electerious/basicslider.svg#info=dependencies) [![Donate via PayPal](https://img.shields.io/badge/paypal-donate-009cde.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CYKBESW577YWE)
+[![Dependencies](https://david-dm.org/electerious/basicslider.svg)](https://david-dm.org/electerious/basicslider.svg#info=dependencies) [![Donate via PayPal](https://img.shields.io/badge/paypal-donate-009cde.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CYKBESW577YWE) [![Greenkeeper badge](https://badges.greenkeeper.io/electerious/basicSlider.svg)](https://greenkeeper.io/)
 
 A slider in its purest form.
 
