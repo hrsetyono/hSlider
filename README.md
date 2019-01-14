@@ -6,7 +6,7 @@ A Responsive & Touch-friendly Javascript Slider, only 2.01KB gzipped.
 
 ## Contents
 
-- [Codepen Demos](https://codepen.io/hrsetyono/pen/ebbeJJ)
+- [Codepen Demo](https://codepen.io/hrsetyono/pen/ebbeJJ)
 - [Setup](#setup)
 - [Options](#options)
 - [API](#api)
