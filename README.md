@@ -31,24 +31,23 @@ A Responsive & Touch-friendly Javascript Slider, only 2.01KB gzipped.
 
 	```html
 	<div class="my-gallery">
-		<img src="...">
-		<img src="...">
-		<img src="...">
-		<img src="...">
+	  <img src="...">
+	  <img src="...">
+	  <img src="...">
+	  <img src="...">
 	</div>
 	```
 
 	```js
 	$(document).ready( function() {
 
-		var instance = $('.my-gallery').hSlider({
-			itemsPerSlide: 3,
-			responsive: {
-				767: 2,
-				480: 1
-			}
-		});
-
+	  var instance = $('.my-gallery').hSlider({
+	    itemsPerSlide: 3,
+	    responsive: {
+	      767: 2,
+	      480: 1
+	    }
+	  });
 	});
 	```
 
