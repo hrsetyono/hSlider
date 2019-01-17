@@ -17,14 +17,14 @@ A Responsive & Touch-friendly Javascript Slider, only 2.01KB gzipped.
 1. Include the CSS files before `</head>`. Change the path to fit your project directory.
 
 	```html
-	<link rel="stylesheet" href="dist/hslider.min.css">
+	<link rel="stylesheet" href="css/h-slider.min.css">
 	```
 
-1. Include the JS files before `</body>`. You can ignore the jQuery if you already added it.
+1. Include the JS files before `</body>`. You can ignore the jQuery if you already added it. Also change the path to fit your project directory.
 
 	```html
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="dist/hslider.min.js"></script>
+	<script src="js/h-slider.min.js"></script>
 	```
 
 1. Apply hSlider to the container.

@@ -3,6 +3,7 @@
   "moduleName": "hSlider",
   "version": "2.0.0",
   "authors": [
+    "Tobias Reich <tobias@electerious.com>",
     "Henner Setyono <henner@setyono.net>"
   ],
   "description": "A Responsive & Touch-friendly Javascript Slider, only 2.01KB gzipped.",
