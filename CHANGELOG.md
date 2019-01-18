@@ -1,3 +1,8 @@
+## 2.1.0
+
+- Fixed a bug where the slider only applied to first element of the same class.
+- Removed mention about API in docs.
+
 ## 2.0.0
 
 - Forked from basicSlider.

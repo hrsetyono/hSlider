@@ -1,6 +1,6 @@
 # hSlider
 
-A Responsive & Touch-friendly Javascript Slider, only 2.01KB gzipped.
+A Responsive & Touch-friendly Javascript Slider, only 2.3 KB gzipped.
 
 > This is a jQuery wrapper of [basicSlider](https://github.com/electerious/basicSlider) with added features like Responsive and Touch-friendliness.
 
@@ -65,32 +65,6 @@ Available options for hSlider are:
 
 - **beforeChange** - Callback before moving to another slide. Parameters: `( instance, newIndex, oldIndex )`
 - **afterChange** - Callback after moving to another slide. Parameters: `( instance, newIndex, oldIndex )`
-
-## API
-
-In example above, we stored the hSlider in `instance` variable. We can use that to perform certain actions.
-
-- **.element()** - Returns the DOM element/node object associated with the instance.
-
-	```js
-	var slides = instance.element().querySelector( '.hSlider-slides' );
-	// or use it with jQuery
-	var slides = $( instance.element() ).find( '.hSlider-slides' );
-	```
-
-- **.length()** - Returns the total number of slides.
-
-- **.current()** - Returns the current slide index (start from 0).
-
-- **.goto( index )** - Navigate to selected slide.
-
-	```js
-	instance.goto( 1 );
-	```
-
-- **.prev()** - Navigate to previous slide. If currently on first slide, it will go to last slide.
-
-- **.next()** - Navigate to next slide. If currently on last slide, it will go to first slide.
 
 ## Requirements
 

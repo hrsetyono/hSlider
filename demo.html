@@ -8,7 +8,7 @@
   <!-- WEBSITE DETAIL -->
   <title>hSlider Demo</title>
   <meta name="theme-color" content="#00aadc">
-  <meta name="description" content="A Responsive & Touch-friendly Javascript Slider, only 2.01KB gzipped.">
+  <meta name="description" content="A Responsive & Touch-friendly Javascript Slider, only 2.3 KB gzipped.">
 
   <!-- STYLESHEET -->
   <link rel="stylesheet" href="https://cdn.setyono.net/edje/h-normalize.css">
@@ -26,6 +26,8 @@
 <body>
 
 <main>
+
+  <h1>Static Slider (4)</h1>
   
   <div id="my-gallery">
     <img src="https://picsum.photos/400/300?image=1043">
@@ -38,6 +40,20 @@
     <img src="https://picsum.photos/400/300?image=980">
   </div>
 
+  <h1>Responsive Slider (3 > 2 > 1)</h1>
+
+  <div id="my-gallery2">
+    <img src="https://picsum.photos/400/300?image=951">
+    <img src="https://picsum.photos/400/300?image=818">
+    <img src="https://picsum.photos/400/300?image=760">
+    <img src="https://picsum.photos/400/300?image=623">
+    <img src="https://picsum.photos/400/300?image=583">
+    <img src="https://picsum.photos/400/300?image=440">
+    <img src="https://picsum.photos/400/300?image=375">
+    <img src="https://picsum.photos/400/300?image=216">
+    <img src="https://picsum.photos/400/300?image=175">
+  </div>
+
 </main>
 
 
@@ -47,7 +63,11 @@
 <script>
 $(document).ready( function() {
 
-  var instance = $('#my-gallery').hSlider({
+  $('#my-gallery').hSlider({
+    itemsPerSlide: 4,
+  })
+
+  $('#my-gallery2').hSlider({
     index: 0, // starting slide
     arrows: true,
     dots: true,

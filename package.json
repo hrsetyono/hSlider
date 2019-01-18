@@ -1,12 +1,12 @@
 {
   "name": "hslider",
   "moduleName": "hSlider",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "authors": [
     "Tobias Reich <tobias@electerious.com>",
     "Henner Setyono <henner@setyono.net>"
   ],
-  "description": "A Responsive & Touch-friendly Javascript Slider, only 2.01KB gzipped.",
+  "description": "A Responsive & Touch-friendly Javascript Slider, only 2.3 KB gzipped..",
   "main": "dist/hslider.min.js",
   "keywords": [
     "slider",

@@ -10,47 +10,56 @@
 
 // CUSTOM HELPER
 jQuery.fn.extend( { hSlider: function( args ) {
-  var _args = args || {},
-    _wrapper = this.get(0),
-    _content = Array.prototype.map.call( _wrapper.children, (slide, i) => slide.outerHTML ),
-    _currentItemsPerSlide = null;
+  var args = args || {};
+  var $targets = this;
 
-  // if responsive, rerun when window resized.
-  if( _args.responsive ) {
-    onResize( initSlider, 100 );
-  }
-
-  return initSlider();
+  $targets.each( create );
   
   /////
 
-  /*
-    Create the slider instance
-  */
-  function initSlider() {
-    let itemsPerSlide =  getItemsPerSlide( _args.responsive, _args.itemsPerSlide );
-    
-    // if current itemsPerSlide already the same, abort
-    if( _currentItemsPerSlide === itemsPerSlide ) { return false; }
-    
-    // get HTML content and create slider
-    var instance = basicSlider.create( _wrapper,
-      groupSlides( _content, itemsPerSlide )
-    );
+  function create() {
+    var wrapper = this;
+    var content = Array.prototype.map.call( wrapper.children, (slide, i) => slide.outerHTML );
+    var currentIPS = null; // current items per slide
 
-    // set new itemsPerSlide and add proper class to wrapper
-    _currentItemsPerSlide = itemsPerSlide;
-    var slides = instance.element().querySelector( '.hSlider-slides' );
-    slides.className += ' per-slide-' + _currentItemsPerSlide;
+    _createInstance();
 
-    // set onTouch listener, if option not given or set to true
-    if( _args.touch == null || _args.touch ) {
-      onTouch( instance );
+    // Adapt number of items-per-slide based on screen's width.
+    if( args.responsive ) {
+      let timer = null;
+
+      window.addEventListener('resize', () => {
+        clearTimeout( timer );
+        timer = setTimeout( _createInstance, 100 );
+      });
     }
 
-    return instance;
-  }
+    /////
 
+    // Create the slider instance
+    function _createInstance() {
+      let ips =  getIPS( args.responsive, args.itemsPerSlide );
+    
+      // if current itemsPerSlide already the same, abort
+      if( currentIPS === ips ) { return false; }
+      
+      // Create the slider
+      var instance = basicSlider.create( wrapper,
+        groupSlides( content, ips ),
+        args
+      );
+
+      // Add "per-slide-x" class to wrapper
+      var slides = instance.element().querySelector( '.hSlider-slides' );
+      slides.className += ' per-slide-' + ips;
+
+
+      // set onTouch listener, if option not given or set to true
+      if( args.touch == null || args.touch ) {
+        onTouch( instance );
+      }
+    }
+  }
 
   /*
     Group the content of slider based on itemsPerSlide
@@ -73,33 +82,16 @@ jQuery.fn.extend( { hSlider: function( args ) {
 
 
   /*
-    Adapt number of items-per-slide based on screen's width. Only when "responsive" argument is given.
-    
-    @param callback (function) - Run when screen resize
-    @param delay (int) - Time to wait before running callback in milliseconds.
-  */
-  function onResize( callback, delay ) {
-    let timer = null;
-
-    window.addEventListener('resize', () => {
-      clearTimeout( timer );
-      timer = setTimeout( callback, delay );
-    });
-  }
-  
-
-
-  /*
     Get items per slide, check for responsiveness too
 
     @param breakpoints (obj) - Key-value pair, key is the screen width and value is the number of items per slide.
-    @param defaultItemsPerSlide (int)
+    @param defaultIPS (int) - Default items per slide
 
     @return int - Number of items per slide at current screen's width
   */
-  function getItemsPerSlide( breakpoints, defaultItemsPerSlide ) {
+  function getIPS( breakpoints, defaultIPS ) {
     // check if responsive
-    if( _args.responsive ) {
+    if( args.responsive ) {
       const width = window.innerWidth || window.outerWidth;
       var bpKeys = Object.keys( breakpoints );
 
@@ -112,7 +104,7 @@ jQuery.fn.extend( { hSlider: function( args ) {
     }
 
     // if not responsive or above any breakpoint
-    return defaultItemsPerSlide || 1;
+    return defaultIPS || 1;
   }
 
 
