@@ -49,17 +49,17 @@
 
 // Arrow
 .hSlider-arrow
-  +h( cursor-pointer absolute top50 p0 b0 o40 )
+  +h( d-flex ai-center jc-center cursor-pointer absolute top50 p0 b0 o40 )
   +h( c-white ta-center brad-circle transition )
-  width: 30px
-  height: 30px
+  width: 35px
+  height: 35px
   background: $font-color
-
   +transform( translateY(-50%) )
   
   &::before
-    font-size: 1.5rem
-    line-height: 30px
+    font-size: 2.5rem
+    line-height: 1
+    +transform( translateY(-0.5rem) )
 
 .hSlider-arrow:hover,
   +h( o100 )

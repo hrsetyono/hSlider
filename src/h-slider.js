@@ -1,7 +1,8 @@
-/*
-  hSlider v2.1.0
-  https://github.com/hrsetyono/hSlider
-*/
+/**
+ * hSlider v2.1.1
+ * https://github.com/hrsetyono/hSlider
+ * @license MIT
+ */
 !function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{("undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:this).basicSlider=e()}}(function(){return function o(a,d,l){function u(n,e){if(!d[n]){if(!a[n]){var t="function"==typeof require&&require;if(!e&&t)return t(n,!0);if(c)return c(n,!0);var r=new Error("Cannot find module '"+n+"'");throw r.code="MODULE_NOT_FOUND",r}var i=d[n]={exports:{}};a[n][0].call(i.exports,function(e){return u(a[n][1][e]||e)},i,i.exports,o,a,d,l)}return d[n].exports}for(var c="function"==typeof require&&require,e=0;e<l.length;e++)u(l[e]);return u}({1:[function(e,n,t){"use strict";n.exports=function(n,e,t){var r=e-n+1,i=t-n;return function(){var e=0<arguments.length&&void 0!==arguments[0]?arguments[0]:0;return 0<=(i=(i+e)%r)&&(i=0+i),i<0&&(i=r+i),n+i}}},{}],2:[function(e,n,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.create=void 0;var r,i=e("count-between"),v=(r=i)&&r.__esModule?r:{default:r};var h="left",g=function(e){"function"==typeof e.stopPropagation&&e.stopPropagation(),"function"==typeof e.preventDefault&&e.preventDefault()},E=function(e,n){var t=document.createElement("button");return e=e===h?"left":"right",t.classList.add("hSlider-arrow"),t.classList.add("hSlider-arrow--"+e),t.onclick=function(e){n(),g(e)},t},b=function(){var e=0<arguments.length&&void 0!==arguments[0]?arguments[0]:"",n=document.createElement("div");return n.classList.add("hSlider-slide"),n.innerHTML=e,n},_=function(e,n,t,r){
   var w=n.offsetWidth; // change the translateX from % to px
   n.style.transform="translateX(-"+(t/r)*w+"px)",
@@ -114,15 +115,15 @@ jQuery.fn.extend( { hSlider: function( args ) {
     @param instance (obj) - basicSlider object
   */
   function onTouch( instance ) {
-    var slides = instance.element().querySelector( '.hSlider-slides' );
+    let slides = instance.element().querySelector( '.hSlider-slides' );
 
     // drag variable
-    var posX1 = 0,
-    posX2 = 0,
-    posInitial,
-    posEnd,
-    threshold = 100,
-    sliderWidth = slides.offsetWidth;
+    let posX1 = 0;
+    let posX2 = 0;
+    let posInitial;
+    let posEnd;
+    let threshold = 100;
+    let sliderWidth = slides.offsetWidth;
     
     slides.onmousedown = dragStart;
     slides.addEventListener( 'touchstart', dragStart );
@@ -133,12 +134,17 @@ jQuery.fn.extend( { hSlider: function( args ) {
     // When touch start, record the coordinate position
     function dragStart( e ) {
       e = e || window.event();
-      e.preventDefault();
+
+      // Disable drag with mouse
+      // if( e.type.indexOf('mouse') !== -1 ) { return false; }
+
       posInitial = _getPos();
 
       if( e.type == 'touchstart' ) {
         posX1 = e.touches[0].clientX;
       } else {
+        e.preventDefault();
+
         posX1 = e.clientX;
         document.onmouseup = dragEnd;
         document.onmousemove = dragMove;

@@ -1,3 +1,7 @@
+## 2.1.1
+
+- Fixed not able to tap link inside slider.
+
 ## 2.1.0
 
 - Fixed a bug where the slider only applied to first element of the same class.

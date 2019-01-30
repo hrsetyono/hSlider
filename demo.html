@@ -20,6 +20,22 @@
       max-width: 960px;
       margin: 0 auto;
     }
+
+    a {
+      display: block;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    article a {
+      display: inline-block;
+      margin-top: 0.5em;
+      padding: 0.25em 0.5em;
+      border: 1px solid #333;
+      border-radius: 4px;
+    }
   </style>
 
 </head>
@@ -27,22 +43,46 @@
 
 <main>
 
-  <h1>Static Slider (4)</h1>
+  <h1>Image Slider (4)</h1>
   
-  <div id="my-gallery">
+  <div id="image-gallery">
     <img src="https://picsum.photos/400/300?image=1043">
     <img src="https://picsum.photos/400/300?image=1039">
     <img src="https://picsum.photos/400/300?image=1044">
     <img src="https://picsum.photos/400/300?image=1036">
-    <img src="https://picsum.photos/400/300?image=1044">
+    <img src="https://picsum.photos/400/300?image=841">
     <img src="https://picsum.photos/400/300?image=1015">
     <img src="https://picsum.photos/400/300?image=987">
     <img src="https://picsum.photos/400/300?image=980">
   </div>
 
+  <h1>Text Slider (2)</h1>
+  <div id="text-gallery">
+    <article>
+      <h3>Hello World</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui ratione eos quia?</p>
+      <a href="https://github.com/hrsetyono/hSlider" target="_blank">Visit Github</a>
+    </article>
+    <article>
+      <h3>Magnam Culpa</h3>
+      <p>Quod incidunt obcaecati repellendus assumenda dolor, suscipit, natus nihil cum, dignissimos nesciunt sequi eius ea laborum pariatur.</p>
+      <a href="https://github.com/hrsetyono/hSlider" target="_blank">Visit Github</a>
+    </article>
+    <article>
+      <h3>Impedit Rerum</h3>
+      <p>Temporibus labore nulla animi explicabo fugiat vel deleniti perspiciatis dolores debitis, suscipit excepturi, dolore enim architecto</p>
+      <a href="https://github.com/hrsetyono/hSlider" target="_blank">Visit Github</a>
+    </article>
+    <article>
+      <h3>Repellendus Neque</h3>
+      <p>Sit consequatur voluptate laboriosam. Molestias libero asperiores quod voluptates, inventore maiores ratione? Porro, accusantium.</p>
+      <a href="https://github.com/hrsetyono/hSlider" target="_blank">Visit Github</a>
+    </article>
+  </div>
+
   <h1>Responsive Slider (3 > 2 > 1)</h1>
 
-  <div id="my-gallery2">
+  <div id="responsive-gallery">
     <img src="https://picsum.photos/400/300?image=951">
     <img src="https://picsum.photos/400/300?image=818">
     <img src="https://picsum.photos/400/300?image=760">
@@ -63,11 +103,15 @@
 <script>
 $(document).ready( function() {
 
-  $('#my-gallery').hSlider({
+  $('#image-gallery').hSlider({
     itemsPerSlide: 4,
-  })
+  });
 
-  $('#my-gallery2').hSlider({
+  $('#text-gallery').hSlider({
+    itemsPerSlide: 2,
+  });
+
+  $('#responsive-gallery').hSlider({
     index: 0, // starting slide
     arrows: true,
     dots: true,

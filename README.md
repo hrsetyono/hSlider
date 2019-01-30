@@ -14,7 +14,7 @@ A Responsive & Touch-friendly Javascript Slider, only 2.3 KB gzipped.
 
 ## Setup
 
-1. Get the CSS and JS files from /dist folder.
+1. Get the CSS and JS files from `/dist` folder.
 
 1. Include the CSS files before `</head>`. Change the path to fit your project directory.
 
