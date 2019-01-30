@@ -11,17 +11,17 @@
 
 // CUSTOM HELPER
 jQuery.fn.extend( { hSlider: function( args ) {
-  var args = args || {};
-  var $targets = this;
+  let args = args || {};
+  let $targets = this;
 
   $targets.each( create );
   
   /////
 
   function create() {
-    var wrapper = this;
-    var content = Array.prototype.map.call( wrapper.children, (slide, i) => slide.outerHTML );
-    var currentIPS = null; // current items per slide
+    let wrapper = this;
+    let content = Array.prototype.map.call( wrapper.children, (slide, i) => slide.outerHTML );
+    let currentIPS = null; // current items per slide
 
     _createInstance();
 
@@ -45,13 +45,13 @@ jQuery.fn.extend( { hSlider: function( args ) {
       if( currentIPS === ips ) { return false; }
       
       // Create the slider
-      var instance = basicSlider.create( wrapper,
+      let instance = basicSlider.create( wrapper,
         groupSlides( content, ips ),
         args
       );
 
       // Add "per-slide-x" class to wrapper
-      var slides = instance.element().querySelector( '.hSlider-slides' );
+      let slides = instance.element().querySelector( '.hSlider-slides' );
       slides.className += ' per-slide-' + ips;
 
 
@@ -73,8 +73,8 @@ jQuery.fn.extend( { hSlider: function( args ) {
   function groupSlides( content, itemsPerSlides ) {
     return content.reduce( ( groups, item, i ) => {
   
-      const group = Math.floor( i / itemsPerSlides );
-      const existing = groups[ group ] == null ? '' : groups[ group ];
+      let group = Math.floor( i / itemsPerSlides );
+      let existing = groups[ group ] == null ? '' : groups[ group ];
 
       groups[ group ] = existing + item;
       return groups;
@@ -93,8 +93,8 @@ jQuery.fn.extend( { hSlider: function( args ) {
   function getIPS( breakpoints, defaultIPS ) {
     // check if responsive
     if( args.responsive ) {
-      const width = window.innerWidth || window.outerWidth;
-      var bpKeys = Object.keys( breakpoints );
+      let width = window.innerWidth || window.outerWidth;
+      let bpKeys = Object.keys( breakpoints );
 
       // check if current width already below the breakpoint
       for( var i = 0, len = bpKeys.length; i < len; i++ ) {
@@ -123,7 +123,6 @@ jQuery.fn.extend( { hSlider: function( args ) {
     let posInitial;
     let posEnd;
     let threshold = 100;
-    let sliderWidth = slides.offsetWidth;
     
     slides.onmousedown = dragStart;
     slides.addEventListener( 'touchstart', dragStart );
@@ -139,14 +138,20 @@ jQuery.fn.extend( { hSlider: function( args ) {
       // if( e.type.indexOf('mouse') !== -1 ) { return false; }
 
       posInitial = _getPos();
-
+      
+      // if touch
       if( e.type == 'touchstart' ) {
         posX1 = e.touches[0].clientX;
-      } else {
+      }
+      // if drag with mouse
+      else {
         e.preventDefault();
 
         posX1 = e.clientX;
         document.onmouseup = dragEnd;
+        e.target.addEventListener( 'click', (e) => {
+          e.preventDefault();
+        } );
         document.onmousemove = dragMove;
       }
     }
@@ -170,8 +175,8 @@ jQuery.fn.extend( { hSlider: function( args ) {
     function dragEnd( e ) {
       posEnd = _getPos();
 
-      var isLastSlide = instance.current() == instance.length() - 1;
-      var isFirstSlide = instance.current() == 0;
+      let isLastSlide = instance.current() == instance.length() - 1;
+      let isFirstSlide = instance.current() == 0;
       
       // if the drag is longer than threshold, move to next/prev
       if( posEnd - posInitial < -threshold && !isLastSlide ) {
@@ -190,13 +195,13 @@ jQuery.fn.extend( { hSlider: function( args ) {
 
     // Get current coordinate of the slider
     function _getPos() {
-      var transform = slides.style.transform;
+      let transform = slides.style.transform;
       return transform.replace(/[^-\d.]/g, '');
     }
 
     // Set slider to a coordinate
     function _setPos( value ) {
-      var move = parseInt( value, 10 );
+      let move = parseInt( value, 10 );
       slides.style.transform = `translateX(${ move }px)`;
     }
   } // onTouch
