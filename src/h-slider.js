@@ -11,7 +11,7 @@
 
 // CUSTOM HELPER
 jQuery.fn.extend( { hSlider: function( args ) {
-  let args = args || {};
+  args = args || {};
   let $targets = this;
 
   $targets.each( create );
@@ -123,6 +123,7 @@ jQuery.fn.extend( { hSlider: function( args ) {
     let posInitial;
     let posEnd;
     let threshold = 100;
+    this.isDrag = true;
     
     slides.onmousedown = dragStart;
     slides.addEventListener( 'touchstart', dragStart );
@@ -139,19 +140,14 @@ jQuery.fn.extend( { hSlider: function( args ) {
 
       posInitial = _getPos();
       
-      // if touch
-      if( e.type == 'touchstart' ) {
+      if( e.type == 'touchstart' ) { // if touch
         posX1 = e.touches[0].clientX;
       }
-      // if drag with mouse
-      else {
+      else { // if drag with mouse
         e.preventDefault();
 
         posX1 = e.clientX;
         document.onmouseup = dragEnd;
-        e.target.addEventListener( 'click', (e) => {
-          e.preventDefault();
-        } );
         document.onmousemove = dragMove;
       }
     }
@@ -160,12 +156,14 @@ jQuery.fn.extend( { hSlider: function( args ) {
     function dragMove( e ) {
       e = e || window.event;
 
-      if( e.type == 'touchmove' ) {
+      if( e.type == 'touchmove' ) { // if touch
         posX2 = posX1 - e.touches[0].clientX;
         posX1 = e.touches[0].clientX;
-      } else {
+      } else { // if mouse drag
         posX2 = posX1 - e.clientX;
         posX1 = e.clientX;
+
+        this.isDrag = true;
       }
 
       _setPos( _getPos() - posX2 );
@@ -184,14 +182,27 @@ jQuery.fn.extend( { hSlider: function( args ) {
       } else if( posEnd - posInitial > threshold && !isFirstSlide ) {
         instance.prev();
       }
-      // if the drag is shorter than threshold, return to this slide
+      // if the drag is shorter than threshold, stay in current slide
       else {
         _setPos( posInitial );
       }
 
+      // prevent click if already dragging
+      if( e.type == 'mouseup' ) {
+        this.isDrag ?
+          e.target.addEventListener('click', _preventClick)
+          :
+          e.target.removeEventListener('click', _preventClick);
+        
+          this.isDrag = false;
+      }
+
+      
       document.onmouseup = null;
       document.onmousemove = null;
     }
+
+    //
 
     // Get current coordinate of the slider
     function _getPos() {
@@ -203,6 +214,12 @@ jQuery.fn.extend( { hSlider: function( args ) {
     function _setPos( value ) {
       let move = parseInt( value, 10 );
       slides.style.transform = `translateX(${ move }px)`;
+    }
+    
+    // Prevent click event to trigger when dragging  
+    function _preventClick(e) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
     }
   } // onTouch
 

@@ -1,6 +1,7 @@
 ## 2.1.1
 
 - Fixed not able to tap link inside slider.
+- Fixed link being clicked when dragging.
 
 ## 2.1.0
 
