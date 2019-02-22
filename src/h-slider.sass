@@ -1,4 +1,4 @@
-/// hSlider v2
+// hSlider v2.1.1
 // https://github.com/hrsetyono/hSlider
   
 @import "setting"
@@ -57,11 +57,16 @@
   +transform( translateY(-50%) )
   
   &::before
-    font-size: 2.5rem
-    line-height: 1
-    +transform( translateY(-0.5rem) )
+    content: ""
+    position: relative
+    width: 0
+    height: 0
+    font-size: 0
+    line-height: 0%
+    border-style: solid
+    border-color: transparent
 
-.hSlider-arrow:hover,
+.hSlider-arrow:hover
   +h( o100 )
 
 .hSlider-arrow--left
@@ -69,14 +74,18 @@
   text-indent: -2px
 
   &::before
-    content: "‹"
+    right: 2px
+    border-width: 8px 10px 8px 0
+    border-right-color: #fff
 
 .hSlider-arrow--right
   right: 6px
   text-indent: 2px
   
   &::before
-    content: "›"
+    left: 2px
+    border-width: 8px 0 8px 10px
+    border-left-color: #fff
 
 
 // Dots

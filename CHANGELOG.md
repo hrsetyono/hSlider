@@ -1,3 +1,7 @@
+## 2.1.2
+
+- Changed arrow to CSS triangle instead of using ASCII arrow.
+
 ## 2.1.1
 
 - Fixed not able to tap link inside slider.
