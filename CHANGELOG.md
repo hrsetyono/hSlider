@@ -1,3 +1,8 @@
+## 2.2.0
+
+- Removed jQuery dependencies.
+- Added conditional to jQuery extension if it's provided.
+
 ## 2.1.2
 
 - Changed arrow to CSS triangle instead of using ASCII arrow.

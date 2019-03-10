@@ -115,21 +115,20 @@
 </main>
 
 
-<!-- JAVASCRIPT LIBRARY -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="src/h-slider.js"></script>
 <script>
-$(document).ready( function() {
+document.addEventListener('DOMContentLoaded', () => {
 
-  $('#image-gallery').hSlider({
+  hSlider( document.querySelector('#image-gallery'), {
     itemsPerSlide: 4,
-  });
+  } )
 
-  $('#text-gallery').hSlider({
+  hSlider( document.querySelector('#text-gallery'), {
     itemsPerSlide: 2,
-  });
+  } );
 
-  $('#responsive-gallery').hSlider({
+
+  hSlider( document.querySelector('#responsive-gallery'), {
     index: 0, // starting slide
     arrows: true,
     dots: true,
@@ -140,11 +139,6 @@ $(document).ready( function() {
       480: 1  // 1 item when 480px or below
     }
   });
-
-  // $('#responsive-gallery a').on( 'click', (e) => {
-  //   e.preventDefault();
-  //   alert( 'clicked' );
-  // })
 
 });
 </script>

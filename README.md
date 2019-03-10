@@ -2,79 +2,114 @@
 
 A Responsive & Touch-friendly Javascript Slider, only 2.3 KB gzipped.
 
-> This is a jQuery wrapper of [basicSlider](https://github.com/electerious/basicSlider) with added features like Responsive and Touch-friendliness.
+**TABLE OF CONTENTS**
 
-## Contents
-
-- [Codepen Demo](https://codepen.io/hrsetyono/pen/ebbeJJ)
-- [Setup](#setup)
-- [Options](#options)
-- [API](#api)
+- [Demo](#demo)
+- [Features](#features)
+- [How to Use](#how-to-use)
 - [Requirements](#requirements)
+- [Credit](#credit)
 
-## Setup
+## Demo
 
-1. Get the CSS and JS files from `/dist` folder.
+| Name | Link |
+| --- | --- |
+| Basic Usage | [View in Codepen](https://codepen.io/hrsetyono/pen/ebbeJJ) |
 
-1. Include the CSS files before `</head>`. Change the path to fit your project directory.
+## Features
 
-	```html
-	<link rel="stylesheet" href="css/h-slider.css">
-	```
+- **Responsive** - Items-per-slide can change depending on screen size.
+- **Flexible** - Supports any type of content.
+- **Lightweight** - Our script is only 2.1 KB gzipped.
+- **No dependencies** - Just plain old JS.
 
-1. Include the JS files before `</body>`. You can ignore the jQuery if you already added it. Also change the path to fit your project directory.
+## How to Use
 
-	```html
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="js/h-slider.min.js"></script>
-	```
+Get the CSS and JS files from this repos's `/dist` directory.
 
-1. Apply hSlider to the container.
+```
+hSlider( target, [args] )
+```
 
-	```html
-	<div class="my-gallery">
-	  <img src="...">
-	  <img src="...">
-	  <img src="...">
-	  <img src="...">
-	</div>
-	```
+- **target** (Node) - The wrapper element of your slider.
+- **args** (obj) - Optional - Possible arguments are:
 
-	```js
-	$(document).ready( function() {
+	- **index** (int) - The starting slide. Default: 0.
+	- **arrows** (bool) - Show or hide the arrows. Default: true.
+	- **dots** (bool) - Show or hide the pagination. Default: true.
+	- **touch** (bool) - Enable or disable the swipe gesture. Default: true.
 
-	  var instance = $('.my-gallery').hSlider({
-	    itemsPerSlide: 3,
-	    responsive: {
-	      767: 2,
-	      480: 1
-	    }
-	  });
-	});
-	```
+	- **itemsPerSlide** (int) - Number of items per slide. Default: 1.
+	- **responsive** (obj) - Number of items when reaching certain breakpoint. Default: null.
 
-## Options
+	- **beforeChange** (fn) - Callback before moving to another slide. Parameters: `( instance, newIndex, oldIndex )`
+	- **afterChange** (fn) - Callback after moving to another slide. Parameters: `( instance, newIndex, oldIndex )`
 
-Available options for hSlider are:
+**EXAMPLE 1**
 
-- **index** - The starting slide. Default: 0.
-- **arrows** - Show or hide the arrows. Default: true.
-- **dots** - Show or hide the pagination. Default: true.
-- **touch** - Enable or disable the swipe gesture. Default: true.
+Basic usage with responsive feature. This slider is 3 items-per-slide on default. But become 2 items when the screen width is below 767px. And only 1 item when below 480px.
 
-- **itemsPerSlide** - Number of items per slide. Default: 1.
-- **responsive** - Number of items when reaching certain breakpoint. Default: null.
+```html
+<div class="my-gallery">
+  <img src="...">
+  <img src="...">
+  <img src="...">
+  <img src="...">
+</div>
+```
 
-- **beforeChange** - Callback before moving to another slide. Parameters: `( instance, newIndex, oldIndex )`
-- **afterChange** - Callback after moving to another slide. Parameters: `( instance, newIndex, oldIndex )`
+```js
+document.addEventListener('DOMContentLoaded', () => {
 
-## Requirements
+  let target = document.querySelector( '.my-gallery' );
+  hSlider( target, {
+    itemsPerSlide: 3,
+    responsive: {
+      767: 2,
+      480: 1
+    }
+  });
 
-hSlider depends on **jQuery**. Tested working on version 1.12.4.
+});
+```
 
-hSlider also depends on the following browser APIs:
+**EXAMPLE 2**
+
+If you have multiple sliders with the same class name, simply use `querySelectorAll` and loop them.
+
+```html
+<div class="my-gallery"> ... </div>
+
+<div class="my-gallery"> ... </div>
+
+<div class="my-gallery"> ... </div>
+```
+
+```js
+document.addEventListener('DOMContentLoaded', () => {
+
+  let targets = document.querySelectorAll( '.my-gallery' );
+  for( var t in targets ) {
+    hSlider( t, {
+      itemsPerSlide: 3,
+      responsive: { 767: 2, 480: 1 }
+    } );
+  }
+
+});
+```
+
+----
+
+### Requirements
+
+hSlider depends on the following browser APIs:
 
 - [Object.assign](http://www.ecma-international.org/ecma-262/6.0/#sec-object.assign)
 - [Number.isFinite](http://www.ecma-international.org/ecma-262/6.0/#sec-number.isfinite)
 
 Some of these APIs are capable of being polyfilled in older browsers. Check the linked resources above to determine if you must polyfill to achieve your desired level of browser support.
+
+### Credit
+
+This is a fork of [basicSlider](https://github.com/electerious/basicSlider) with added features like Responsive and Touch-friendliness. So big thanks to [Tobias Reich](https://github.com/electerious) for creating an awesome basis for this library.

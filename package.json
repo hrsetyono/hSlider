@@ -1,7 +1,7 @@
 {
   "name": "hslider",
   "moduleName": "hSlider",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "authors": [
     "Tobias Reich <tobias@electerious.com>",
     "Henner Setyono <henner@setyono.net>"
@@ -24,9 +24,11 @@
     "src"
   ],
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "uglify-js-es6": "~3.4.9"
+  },
   "scripts": {
-    "sass": "FOR /f \"delims=\" %v IN ('node -p \"require('edje').includePaths()[0]\"') DO node-sass -w src -o dist --output-style compressed --include-path \"%v\" ",
+    "sass": "node-sass -w src -o dist --output-style compressed",
     "minify": "uglifyjs src/h-slider.js --output dist/h-slider.min.js --comments"
   }
 }

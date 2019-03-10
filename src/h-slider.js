@@ -9,90 +9,64 @@
   e.forEach(function(e){return e.classList.remove("active")}),e[t].classList.add("active")},u=function(e,n,i,t){var r,o,a,d,l,u,c,s,f,p=(0,v.default)(0,i.length()-1,t.index),m={};return m.slideElems=n.map(b),m.dotElems=n.map(function(e,n){return t=i.goto.bind(null,n),(r=document.createElement("button")).classList.add("hSlider-dot"),r.onclick=function(e){t(),g(e)},r;var t,r}),m.dotsElem=function(){var e=0<arguments.length&&void 0!==arguments[0]?arguments[0]:[],n=document.createElement("div");return n.classList.add("hSlider-dots"),e.forEach(function(e){return n.appendChild(e)}),n}(m.dotElems),m.slidesElem=function(){var e=0<arguments.length&&void 0!==arguments[0]?arguments[0]:[],n=document.createElement("div");return n.classList.add("hSlider-slides"),n.style.width=100*e.length+"%",e.forEach(function(e){return n.appendChild(e)}),n}(m.slideElems),m.containerElem=(r=m.slidesElem,(o=document.createElement("div")).classList.add("hSlider-container"),o.appendChild(r),o),m.arrowLeftElem=E(h,i.prev),m.arrowRightElem=E("right",i.next),_(m.dotElems,m.slidesElem,p(),i.length()),a=e,l=t,u=(d=m).arrowLeftElem,c=d.arrowRightElem,s=d.dotsElem,f=d.containerElem,a.classList.add("hSlider"),a.innerHTML="",a.appendChild(f),!0===l.arrows&&(a.appendChild(u),a.appendChild(c)),!0===l.dots&&a.appendChild(s),{c:p,refs:m}};t.create=function(e,n,t){t=function(){var e=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{};return e=Object.assign({},e),!1===Number.isFinite(e.index)&&(e.index=0),!1!==e.arrows&&(e.arrows=!0),!1!==e.dots&&(e.dots=!0),"function"!=typeof e.beforeChange&&(e.beforeChange=function(){}),"function"!=typeof e.afterChange&&(e.afterChange=function(){}),e}(t);var r=null,i=null,o=function(){return n.length},a=function(e){var n=1<arguments.length&&void 0!==arguments[1]?arguments[1]:r();if(!1===t.beforeChange(d,e,n))return!1;r=(0,v.default)(0,o()-1,e),_(i.dotElems,i.slidesElem,r(),o()),t.afterChange(d,e,n)},d={element:function(){return e},length:o,current:function(){return r()},goto:a,prev:function(){var e=r(),n=r(-1);a(n,e)},next:function(){var e=r(),n=r(1);a(n,e)}},l=u(e,n,d,t);return r=l.c,i=l.refs,d}},{"count-between":1}]},{},[2])(2)});
 
 
-// CUSTOM HELPER
-jQuery.fn.extend( { hSlider: function( args ) {
-  args = args || {};
-  let $targets = this;
+/*
+  basicSlider with extra features like being Responsive and Touch-friendly.
 
-  $targets.each( create );
+  @param target (Node) - slider element, from querySelector()
+  @param args (obj) -  slider configuration
+
+  EXAMPLE
+
+      hSlider( document.querySelector('.my-slider'), {
+        itemsPerSlide: 3,
+        touch: true
+      } );
+*/
+function hSlider( target, args = {} ) {
+  if( !target ) {
+    console.error( "hSlider Error: Target element not found" );
+    return false;
+  }
   
+  // constructor 
+  let currentIPS = null;
+  let rawContent = Array.prototype.map.call( target.children, (slide, i) => slide.outerHTML );
+  let ips = calcIPS();
+  
+  initSlider( ips );
+  
+  if( args.responsive ) {
+    onResize();
+  }
+
   /////
 
-  function create() {
-    let wrapper = this;
-    let content = Array.prototype.map.call( wrapper.children, (slide, i) => slide.outerHTML );
-    let currentIPS = null; // current items per slide
+  function initSlider( ips ) {
+    currentIPS = ips;
+    let content = groupContent( rawContent, ips );
+    let instance = createInstance( content );
 
-    _createInstance();
+    // Add "per-slide-x" class to wrapper
+    let slides = instance.element().querySelector( '.hSlider-slides' );
+    slides.className += ' per-slide-' + currentIPS;
 
-    // Adapt number of items-per-slide based on screen's width.
-    if( args.responsive ) {
-      let timer = null;
-
-      window.addEventListener('resize', () => {
-        clearTimeout( timer );
-        timer = setTimeout( _createInstance, 100 );
-      });
-    }
-
-    /////
-
-    // Create the slider instance
-    function _createInstance() {
-      let ips =  getIPS( args.responsive, args.itemsPerSlide );
-    
-      // if current itemsPerSlide already the same, abort
-      if( currentIPS === ips ) { return false; }
-      
-      // Create the slider
-      let instance = basicSlider.create( wrapper,
-        groupSlides( content, ips ),
-        args
-      );
-
-      // Add "per-slide-x" class to wrapper
-      let slides = instance.element().querySelector( '.hSlider-slides' );
-      slides.className += ' per-slide-' + ips;
-
-
-      // set onTouch listener, if option not given or set to true
-      if( args.touch == null || args.touch ) {
-        onTouch( instance );
-      }
+    // Set touch event
+    if( args.touch == null || args.touch ) {
+      onTouch( instance );
     }
   }
 
   /*
-    Group the content of slider based on itemsPerSlide
-
-    @param content (array) - Array of each slides content.
-    @param itemsPerSlides (int) - Number of items per slide.
-
-    @return array - Grouped array
-  */
-  function groupSlides( content, itemsPerSlides ) {
-    return content.reduce( ( groups, item, i ) => {
-  
-      let group = Math.floor( i / itemsPerSlides );
-      let existing = groups[ group ] == null ? '' : groups[ group ];
-
-      groups[ group ] = existing + item;
-      return groups;
-    }, []);
-  }
-
-
-  /*
-    Get items per slide, check for responsiveness too
-
-    @param breakpoints (obj) - Key-value pair, key is the screen width and value is the number of items per slide.
-    @param defaultIPS (int) - Default items per slide
+    Calculate items per slide, check for responsiveness too
 
     @return int - Number of items per slide at current screen's width
   */
-  function getIPS( breakpoints, defaultIPS ) {
-    // check if responsive
-    if( args.responsive ) {
+  function calcIPS() {
+    let breakpoints = args.responsive;
+    let defaultIPS = args.itemsPerSlide;
+
+    // if responsive
+    if( breakpoints ) {
       let width = window.innerWidth || window.outerWidth;
       let bpKeys = Object.keys( breakpoints );
 
@@ -108,7 +82,56 @@ jQuery.fn.extend( { hSlider: function( args ) {
     return defaultIPS || 1;
   }
 
+   /*
+      Group the content of slider based on itemsPerSlide
 
+      @param raw (str) - The raw HTML content
+      @param ips (int) - Number of items per slide
+      @return array - Grouped slides
+    */
+   function groupContent( raw, ips ) {
+    return raw.reduce( ( groups, item, i ) => {
+
+      let group = Math.floor( i / ips );
+      let existing = groups[ group ] == null ? '' : groups[ group ];
+
+      groups[ group ] = existing + item;
+      return groups;
+    }, []);
+  }
+
+
+  /*
+    Create slider instance
+
+    @param content (array) - Each array is the content of a slide.
+    @return (obj) basicSlider instance.
+  */
+  function createInstance( content ) {
+    let instance = basicSlider.create( target, content, args );
+
+    return instance;
+  }
+
+  /*
+    Recreate the slider when window is resized
+  */
+  function onResize() {
+    let timer = null;
+
+    window.addEventListener('resize', () => {
+      clearTimeout( timer );
+      timer = setTimeout( () => {
+        // recalculate IPS, if different, recreate slider
+        let ips = calcIPS();
+        if( currentIPS === ips ) { return false; }
+        
+        initSlider( ips );
+      }, 100 );
+    });
+  }
+
+  
   /*
     Enable swipe gesture.
 
@@ -197,7 +220,6 @@ jQuery.fn.extend( { hSlider: function( args ) {
           this.isDrag = false;
       }
 
-      
       document.onmouseup = null;
       document.onmousemove = null;
     }
@@ -223,4 +245,27 @@ jQuery.fn.extend( { hSlider: function( args ) {
     }
   } // onTouch
 
-} }); // jQuery extend
+}
+
+/*
+  hSlider jQuery extension
+
+  EXAMPLE:
+
+      $('.my-slider').hSlider( {
+        itemsPerSlide: 3,
+        touch: true
+      } );
+*/
+if( window.jQuery ) {
+  jQuery.fn.extend( {
+    hSlider: function( args ) {
+      args = args || {};
+      let $targets = this;
+
+      $targets.each( function() {
+        hSlider( $(this).get(0), args );
+      } );
+    }
+  });
+}
