@@ -1,6 +1,6 @@
 # hSlider
 
-A Responsive & Touch-friendly Javascript Slider, only 2.3 KB gzipped.
+A responsive & touch-friendly Javascript slider, only 2.1 KB gzipped.
 
 **TABLE OF CONTENTS**
 
@@ -89,7 +89,7 @@ If you have multiple sliders with the same class name, simply use `querySelector
 document.addEventListener('DOMContentLoaded', () => {
 
   let targets = document.querySelectorAll( '.my-gallery' );
-  for( var t in targets ) {
+  for( let t of targets ) {
     hSlider( t, {
       itemsPerSlide: 3,
       responsive: { 767: 2, 480: 1 }
