@@ -32,7 +32,7 @@ function hSlider( target, args = {} ) {
   let currentIPS = null;
   let rawContent = Array.prototype.map.call( target.children, (slide, i) => slide.outerHTML );
   let ips = calcIPS();
-  
+
   initSlider( ips );
   
   if( args.responsive ) {
@@ -56,6 +56,7 @@ function hSlider( target, args = {} ) {
     }
   }
 
+  
   /*
     Calculate items per slide, check for responsiveness too
 
@@ -82,14 +83,15 @@ function hSlider( target, args = {} ) {
     return defaultIPS || 1;
   }
 
-   /*
-      Group the content of slider based on itemsPerSlide
 
-      @param raw (str) - The raw HTML content
-      @param ips (int) - Number of items per slide
-      @return array - Grouped slides
-    */
-   function groupContent( raw, ips ) {
+  /*
+    Group the content of slider based on itemsPerSlide
+
+    @param raw (str) - The raw HTML content
+    @param ips (int) - Number of items per slide
+    @return array - Grouped slides
+  */
+  function groupContent( raw, ips ) {
     return raw.reduce( ( groups, item, i ) => {
 
       let group = Math.floor( i / ips );
@@ -112,6 +114,7 @@ function hSlider( target, args = {} ) {
 
     return instance;
   }
+
 
   /*
     Recreate the slider when window is resized

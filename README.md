@@ -7,6 +7,7 @@ A responsive & touch-friendly Javascript slider, only 2.1 KB gzipped.
 - [Demo](#demo)
 - [Features](#features)
 - [How to Use](#how-to-use)
+- [jQuery Extension](#jquery-extension)
 - [Requirements](#requirements)
 - [Credit](#credit)
 
@@ -99,7 +100,19 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-----
+## jQuery Extension
+
+This is only available when your website uses jQuery.
+
+In example below, even if there are multiple `.my-gallery`, you don't need to create a loop.
+
+```js
+$( '.my-gallery' ).hSlider( {
+  itemsPerSlide: 3,
+  responsive: { 767: 2, 480: 1 }
+} );
+```
+
 
 ### Requirements
 
