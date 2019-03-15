@@ -12,7 +12,7 @@
 /*
   basicSlider with extra features like being Responsive and Touch-friendly.
 
-  @param target (Node) - slider element, from querySelector()
+  @param target (Node) - slider wrapper element, from querySelector()
   @param args (obj) -  slider configuration
 
   EXAMPLE
@@ -262,8 +262,7 @@ function hSlider( target, args = {} ) {
 */
 if( window.jQuery ) {
   jQuery.fn.extend( {
-    hSlider: function( args ) {
-      args = args || {};
+    hSlider: function( args = {} ) {
       let $targets = this;
 
       $targets.each( function() {
