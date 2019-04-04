@@ -3,10 +3,10 @@
 @import "settings"
 
 .hSlider
-  +h( relative w100 p0 )
+  +h( relative w100 mb2 pv2 ov-hidden )
 
 .hSlider-container
-  +h( relative w100 h100 ov-hidden )
+  +h( relative w100 h100 mh-auto )
 
 .hSlider-slides
   +h( relative d-flex h100 transition select-none )
@@ -39,9 +39,6 @@
   
   .per-slide-8 &
     width: calc( 100% / 8 )
-
-.hSlider
-  +h( mb3 )
 
 
 // Arrow
@@ -87,7 +84,7 @@
 
 // Dots
 .hSlider-dots
-  +h( absolute d-flex jc-center ai-center top100 w100 )
+  +h( absolute d-flex jc-center ai-center bottom0 w100 )
   height: 2rem
 
   button

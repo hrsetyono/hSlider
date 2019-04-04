@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- WEBSITE DETAIL -->
+  <title>hSlider Demo</title>
+  <meta name="theme-color" content="#00aadc">
+  <meta name="description" content="A Responsive & Touch-friendly Javascript Slider, only 2.3 KB gzipped.">
+
+  <!-- STYLESHEET -->
+  <link rel="stylesheet" href="https://cdn.setyono.net/edje/h-normalize.css">
+  <link rel="stylesheet" href="dist/h-slider.css">
+  
+  <link rel="stylesheet" href="https://s.electerious.com/basicSlider/dist/basicSlider.min.css">
+  <link rel="stylesheet" href="https://s.electerious.com/basicSlider/dist/themes/default.min.css">
+ 
+
+  <style>
+    main {
+      padding: 3rem 10px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    a {
+      display: block;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    #peek-gallery {
+      width: 600px;
+    }
+
+    #peek-gallery .hSlider-container {
+      width: 75%;
+    }
+  </style>
+
+</head>
+<body>
+
+<main>
+
+  <h1>Slider with Peek of Next/Prev Slide</h1>
+
+  <div id="peek-gallery">
+    <a href="https://picsum.photos/600/450?image=583" target="_blank">
+      <img src="https://picsum.photos/600/450?image=583">
+    </a>
+    <a href="https://picsum.photos/600/450?image=440" target="_blank">
+      <img src="https://picsum.photos/600/450?image=440">
+    </a>
+    <a href="https://picsum.photos/600/450?image=375" target="_blank">
+      <img src="https://picsum.photos/600/450?image=375">
+    </a>
+    <a href="https://picsum.photos/600/450?image=216" target="_blank">
+      <img src="https://picsum.photos/600/450?image=216">
+    </a>
+    <a href="https://picsum.photos/600/450?image=175" target="_blank">
+      <img src="https://picsum.photos/600/450?image=175">
+    </a>
+  </div>
+
+</main>
+
+
+<!-- <script src="src/basicSlider.js"></script> -->
+<script src="src/h-slider.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  let peek = document.querySelector('#peek-gallery');
+  let peekContent = Array.prototype.map.call( peek.children, (slide) => slide.outerHTML );
+
+  // basicSlider.create( peek, peekContent, { index: 2, arrows: true } );
+  hSlider( peek, { index: 2, arrows: true, dots: true } );
+});
+</script>
+
+</body>
+</html>

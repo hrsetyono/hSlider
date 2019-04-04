@@ -112,6 +112,36 @@
     </a>
   </div>
 
+  <h1>Slider with Peek of Next/Prev Slide</h1>
+
+  <style>
+    #peek-gallery {
+      width: 600px;
+    }
+
+    #peek-gallery .hSlider-container {
+      width: 75%;
+    }
+  </style>
+
+  <div id="peek-gallery">
+    <a href="https://picsum.photos/600/450?image=583" target="_blank">
+      <img src="https://picsum.photos/600/450?image=583">
+    </a>
+    <a href="https://picsum.photos/600/450?image=440" target="_blank">
+      <img src="https://picsum.photos/600/450?image=440">
+    </a>
+    <a href="https://picsum.photos/600/450?image=375" target="_blank">
+      <img src="https://picsum.photos/600/450?image=375">
+    </a>
+    <a href="https://picsum.photos/600/450?image=216" target="_blank">
+      <img src="https://picsum.photos/600/450?image=216">
+    </a>
+    <a href="https://picsum.photos/600/450?image=175" target="_blank">
+      <img src="https://picsum.photos/600/450?image=175">
+    </a>
+  </div>
+
 </main>
 
 
@@ -129,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   hSlider( document.querySelector('#responsive-gallery'), {
-    index: 0, // starting slide
+    index: 2, // starting slide
     arrows: true,
     dots: true,
     touch: true,
@@ -140,6 +170,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  let peek = document.querySelector('#peek-gallery');
+  let peekContent = Array.prototype.map.call( peek.children, (slide) => slide.outerHTML );
+
+  basicSlider.create( peek, peekContent, { index: 2 } );
 });
 </script>
 
