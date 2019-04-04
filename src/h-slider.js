@@ -1,5 +1,5 @@
 /**
- * hSlider v2.3.0
+ * hSlider v2.3.1
  * https://github.com/hrsetyono/hSlider
  * @license MIT
  */
@@ -147,7 +147,6 @@ function hSlider( target, args = {} ) {
     let posEnd;
     let slidesWidth = slides.offsetWidth;
     let threshold = (slidesWidth / instance.length() ) / 100;
-    console.log( threshold );
     this.isDrag = true;
     
     slides.onmousedown = dragStart;
