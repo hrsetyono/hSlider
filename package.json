@@ -25,7 +25,7 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "uglify-js-es6": "~3.4.9"
+    "uglify-js-es6": "~3.4"
   },
   "scripts": {
     "sass": "node-sass -w src -o dist --output-style compressed",

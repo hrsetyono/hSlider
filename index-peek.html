@@ -76,10 +76,9 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   let peek = document.querySelector('#peek-gallery');
-  let peekContent = Array.prototype.map.call( peek.children, (slide) => slide.outerHTML );
 
   // basicSlider.create( peek, peekContent, { index: 2, arrows: true } );
-  hSlider( peek, { index: 2, arrows: true, dots: true } );
+  hSlider( peek, { arrows: true, dots: true } );
 });
 </script>
 

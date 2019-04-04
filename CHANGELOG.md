@@ -1,3 +1,9 @@
+## 2.3.0
+
+- Fixed `index` argument not working due to changing slider to use `px` instead of `%`.
+- Reverted changes from using `px` when slider moves, back to `%`.
+- Changed CSS to support "peek" layout. Check out `index-peek.html` for an example.
+
 ## 2.2.0
 
 - Removed jQuery dependencies.
