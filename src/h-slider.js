@@ -1,5 +1,5 @@
 /**
- * hSlider v2.3.1
+ * hSlider v2.3.2
  * https://github.com/hrsetyono/hSlider
  * @license MIT
  */
@@ -164,7 +164,7 @@ function hSlider( target, args = {} ) {
       posInitial = _getPos();
       
       if( e.type == 'touchstart' ) { // if touch
-        posX1 = e.touches[0].clientX;
+        posX1 = _percent( e.touches[0].clientX );
       }
       else { // if drag with mouse
         e.preventDefault();
@@ -180,8 +180,8 @@ function hSlider( target, args = {} ) {
       e = e || window.event;
 
       if( e.type == 'touchmove' ) { // if touch
-        posX2 = posX1 - e.touches[0].clientX;
-        posX1 = e.touches[0].clientX;
+        posX2 = posX1 - _percent( e.touches[0].clientX );
+        posX1 = _percent( e.touches[0].clientX );
       }
       else { // if mouse drag
         posX2 = posX1 - _percent( e.clientX );
@@ -244,7 +244,7 @@ function hSlider( target, args = {} ) {
       e.stopImmediatePropagation();
     }
 
-    // Convert touch coordinate to % based on slider width
+    // Get the touch coordinate in percentage.
     function _percent( num ) {
       return (num / slidesWidth) * 100;
     }

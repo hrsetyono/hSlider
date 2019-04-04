@@ -1,28 +1,16 @@
 {
   "name": "hslider",
-  "moduleName": "hSlider",
-  "version": "2.3.1",
   "authors": [
     "Tobias Reich <tobias@electerious.com>",
     "Henner Setyono <henner@setyono.net>"
   ],
   "description": "A Responsive & Touch-friendly Javascript Slider, only 2.3 KB gzipped..",
-  "main": "dist/hslider.min.js",
-  "keywords": [
-    "slider",
-    "slides",
-    "carousel"
-  ],
   "license": "MIT",
   "homepage": "https://github.com/hrsetyono/hSlider",
   "repository": {
     "type": "git",
     "url": "https://github.com/hrsetyono/hSlider.git"
   },
-  "files": [
-    "dist",
-    "src"
-  ],
   "dependencies": {},
   "devDependencies": {
     "uglify-js-es6": "~3.4"
