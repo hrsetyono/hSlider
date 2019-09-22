@@ -1,5 +1,5 @@
 /**
- * hSlider v2.3.2
+ * hSlider v2.3.3
  * https://github.com/hrsetyono/hSlider
  * @license MIT
  */
@@ -214,11 +214,11 @@ function hSlider( target, args = {} ) {
       // prevent click if already dragging
       if( e.type == 'mouseup' ) {
         this.isDrag ?
-          e.target.addEventListener('click', _preventClick)
+          e.target.addEventListener( 'click', hSlider_preventClick )
           :
-          e.target.removeEventListener('click', _preventClick);
-        
-          this.isDrag = false;
+          e.target.removeEventListener( 'click', hSlider_preventClick );
+
+        this.isDrag = false;
       }
 
       document.onmouseup = null;
@@ -238,30 +238,34 @@ function hSlider( target, args = {} ) {
       slides.style.transform = `translateX(${ value }%)`;
     }
     
-    // Prevent click event to trigger when dragging  
-    function _preventClick(e) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-    }
+
 
     // Get the touch coordinate in percentage.
     function _percent( num ) {
       return (num / slidesWidth) * 100;
     }
   } // onTouch
-
 }
 
-/*
-  hSlider jQuery extension
+/**
+ * Prevent click event to trigger when dragging 
+ */
+function hSlider_preventClick(e) {
+  e.preventDefault();
+  e.stopImmediatePropagation();
+}
 
-  EXAMPLE:
 
-    $('.my-slider').hSlider( {
-      itemsPerSlide: 3,
-      touch: true
-    } );
-*/
+/**
+ * hSlider jQuery extension
+ * 
+ * EXAMPLE:
+ * 
+ *     $('.my-slider').hSlider( {
+ *       itemsPerSlide: 3,
+ *       touch: true
+ *     } );
+ */
 if( window.jQuery ) {
   jQuery.fn.extend( {
     hSlider: function( args = {} ) {
