@@ -16,7 +16,7 @@
     "uglify-js-es6": "~3.4"
   },
   "scripts": {
-    "sass": "node-sass -w src -o dist --output-style compressed",
+    "sass": "node-sass -w src -o dist --output-style compact",
     "minify": "uglifyjs src/h-slider.js --output dist/h-slider.min.js --comments"
   }
 }
