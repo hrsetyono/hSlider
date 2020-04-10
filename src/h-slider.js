@@ -1,5 +1,5 @@
 /**
- * hSlider v2.3.3
+ * hSlider v2.4.0
  * https://github.com/hrsetyono/hSlider
  * @license MIT
  */
@@ -25,7 +25,8 @@ function hSlider( target, args = {} ) {
     return false;
   }
   
-  // constructor 
+  // constructor
+  let instance = null;
   let currentIPS = null;
   let rawContent = Array.prototype.map.call( target.children, (slide, i) => slide.outerHTML );
   let ips = calcIPS();
@@ -36,12 +37,14 @@ function hSlider( target, args = {} ) {
     onResize();
   }
 
+  return instance;
+
   /////
 
   function initSlider( ips ) {
     currentIPS = ips;
     let content = groupContent( rawContent, ips );
-    let instance = createInstance( content );
+    instance = createInstance( content );
 
     // Add "per-slide-x" class to wrapper
     let slides = instance.element().querySelector( '.hSlider-slides' );

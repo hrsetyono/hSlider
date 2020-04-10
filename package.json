@@ -11,12 +11,16 @@
     "type": "git",
     "url": "https://github.com/hrsetyono/hSlider.git"
   },
-  "dependencies": {},
+  "dependencies": {
+    "count-between": "^2.0.2"
+  },
   "devDependencies": {
-    "uglify-js-es6": "~3.4"
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "babel-preset-minify": "^0.4.3"
   },
   "scripts": {
     "sass": "node-sass -w src -o dist --output-style compact",
-    "minify": "uglifyjs src/h-slider.js --output dist/h-slider.min.js --comments"
+    "babel": "babel src/ --watch -d dist/ --presets minify"
   }
 }
